@@ -53,8 +53,7 @@ def test_cmrads200(mlip: tuple[str, Any]) -> None:
     model_name, model = mlip
 
     # Use double precision for this test
-    model.default_dtype = "float64"
-    calc = model.get_calculator()
+    calc = model.get_calculator(precision="high")
 
     data_dir = download_github_data(
         filename="CMR.zip",
