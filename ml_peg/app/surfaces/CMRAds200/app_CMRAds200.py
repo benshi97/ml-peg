@@ -12,8 +12,8 @@ from ml_peg.app.utils.build_callbacks import (
     struct_from_scatter,
 )
 from ml_peg.app.utils.load import read_plot
-from ml_peg.models.get_models import get_model_names
 from ml_peg.models import current_models
+from ml_peg.models.get_models import get_model_names
 
 # Get all models
 MODELS = get_model_names(current_models)
@@ -39,7 +39,13 @@ class CMRAds200App(BaseApp):
         # Assets dir will be parent directory
         structs = [
             f"/assets/surfaces/CMRAds200/{MODELS[0]}/{i}.xyz"
-            for i in range(sum(1 for struct_file in structs_dir.glob('*.xyz') if struct_file.stem.isdigit()))
+            for i in range(
+                sum(
+                    1
+                    for struct_file in structs_dir.glob("*.xyz")
+                    if struct_file.stem.isdigit()
+                )
+            )
         ]
 
         plot_from_table_column(
@@ -69,7 +75,7 @@ def get_app() -> CMRAds200App:
         name=BENCHMARK_NAME,
         description=(
             "Performance in predicting adsorption energies for 200 "
-            "adsorbate-surface systems."
+            "organic adsorbates on transition metal surfaces."
         ),
         docs_url=DOCS_URL,
         table_path=DATA_PATH / "cmrads_metrics_table.json",
